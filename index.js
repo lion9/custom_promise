@@ -22,7 +22,7 @@ class customPromise {
     this.customPromiseState = CUSTOM_PROMISE_STATE.PENDING;
     this.thens = [];
     this.resolvedData = null;
-    this.catch = null;
+    this.catches = null;
     executor(this.resolver, this.rejector);
   }
   resolver = resolvedData => {
@@ -38,7 +38,7 @@ class customPromise {
   };
   rejector = rejectedData => {
     if (this.customPromiseState === CUSTOM_PROMISE_STATE.PENDING) {
-      this.catch && this.catch(rejectedData);
+      this.catches && this.catches(rejectedData);
     }
     this.customPromiseState = CUSTOM_PROMISE_STATE.REJECTED;
   };
@@ -47,7 +47,7 @@ class customPromise {
     return this;
   }
   catch(catches) {
-    this.catch = catches;
+    this.catches = catches;
     return this;
   }
 }
